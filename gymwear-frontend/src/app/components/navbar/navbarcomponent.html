@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary-custom fixed-top">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/">
+            <i class="pi pi-bolt"></i>
+            <strong>GymWear</strong>
+        </a>
+
+        <button class="navbar-toggler" type="button" (click)="toggleMenu()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" [class.show]="isMenuOpen">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i class="pi pi-home"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/products" routerLinkActive="active">
+                        <i class="pi pi-shopping-bag"></i> Productos
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item" *ngIf="!currentUser">
+                    <a class="nav-link" routerLink="/login">
+                        <i class="pi pi-sign-in"></i> Iniciar Sesión
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="!currentUser">
+                    <a class="nav-link" routerLink="/register">
+                        <i class="pi pi-user-plus"></i> Registrarse
+                    </a>
+                </li>
+
+                <li class="nav-item" *ngIf="currentUser">
+                    <a class="nav-link" routerLink="/cart">
+                        <button mat-icon-button>
+                            <mat-icon [matBadge]="cartCount" matBadgeColor="warn">shopping_cart</mat-icon>
+                        </button>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown" *ngIf="currentUser">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="pi pi-user"></i> {{ currentUser.name }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" routerLink="/profile">
+                                <i class="pi pi-user"></i> Mi Perfil
+                            </a>
+                        </li>
+                        <li *ngIf="isAdmin()">
+                            <a class="dropdown-item" routerLink="/admin">
+                                <i class="pi pi-cog"></i> Panel Admin
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">
+                                <i class="pi pi-sign-out"></i> Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

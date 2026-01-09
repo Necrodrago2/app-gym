@@ -1,0 +1,112 @@
+<div class="container py-5">
+    <h2 class="display-5 fw-bold mb-4">
+        <i class="pi pi-shopping-cart"></i> Carrito de Compras
+    </h2>
+
+    <div class="row" *ngIf="cartItems.length > 0">
+        <div class="col-lg-8">
+            <div class="cart-items">
+                <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <img [src]="item.product.imageUrl || 'assets/placeholder-product.jpg'"
+                                 [alt]="item.product.name"
+                                 class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-4">
+                            <h5>{{ item.product.name }}</h5>
+                            <p class="text-muted mb-1" *ngIf="item.size">
+                                <strong>Talla:</strong> {{ item.size }}
+                            </p>
+                            <p class="text-muted" *ngIf="item.color">
+                                <strong>Color:</strong> {{ item.color }}
+                            </p>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="price mb-0">${{ item.product.basePrice }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="quantity-control d-flex align-items-center gap-2">
+                                <button pButton
+                                        icon="pi pi-minus"
+                                        class="p-button-sm p-button-text"
+                                        (click)="updateQuantity(i, item.quantity - 1)"></button>
+                                <span class="quantity">{{ item.quantity }}</span>
+                                <button pButton
+                                        icon="pi pi-plus"
+                                        class="p-button-sm p-button-text"
+                                        (click)="updateQuantity(i, item.quantity + 1)"></button>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <button pButton
+                                    icon="pi pi-trash"
+                                    class="p-button-danger p-button-text"
+                                    (click)="removeItem(i)"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <button pButton
+                        label="Vaciar Carrito"
+                        icon="pi pi-trash"
+                        class="p-button-outlined p-button-danger"
+                        (click)="clearCart()"></button>
+                <button pButton
+                        label="Continuar Comprando"
+                        icon="pi pi-arrow-left"
+                        class="p-button-outlined ms-2"
+                        (click)="continueShopping()"></button>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="order-summary">
+                <h5 class="mb-4">Resumen del Pedido</h5>
+
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span>${{ subtotal.toFixed(2) }}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Envío:</span>
+                    <span>${{ shipping.toFixed(2) }}</span>
+                </div>
+                <div class="summary-row">
+                    <span>IVA (16%):</span>
+                    <span>${{ tax.toFixed(2) }}</span>
+                </div>
+                <hr>
+                <div class="summary-row total">
+                    <span><strong>Total:</strong></span>
+                    <span><strong>${{ total.toFixed(2) }}</strong></span>
+                </div>
+
+                <button pButton
+                        label="Proceder al Pago"
+                        icon="pi pi-arrow-right"
+                        class="w-100 mt-4 p-button-lg"
+                        (click)="proceedToCheckout()"></button>
+
+                <div class="mt-3 text-center">
+                    <small class="text-muted">
+                        <i class="pi pi-lock"></i> Pago 100% seguro
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-cart text-center py-5" *ngIf="cartItems.length === 0">
+        <i class="pi pi-shopping-cart" style="font-size: 5rem; color: var(--text-light);"></i>
+        <h3 class="mt-4">Tu carrito está vacío</h3>
+        <p class="text-muted mb-4">¡Agrega productos para comenzar a comprar!</p>
+        <button pButton
+                label="Explorar Productos"
+                icon="pi pi-shopping-bag"
+                class="p-button-lg"
+                (click)="continueShopping()"></button>
+    </div>
+</div>

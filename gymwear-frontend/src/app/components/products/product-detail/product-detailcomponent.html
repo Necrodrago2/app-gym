@@ -1,0 +1,135 @@
+<div class="container py-5" *ngIf="!loading && product">
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="product-image-section">
+                <img [src]="product.imageUrl || 'assets/placeholder-product.jpg'"
+                     [alt]="product.name"
+                     class="main-product-image img-fluid rounded shadow">
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="product-info">
+                <p-tag
+                        [value]="product.category.name"
+                        [severity]="'info'"
+                        class="mb-3">
+                </p-tag>
+
+                <h1 class="product-title">{{ product.name }}</h1>
+
+                <div class="rating-section mb-3">
+                    <p-rating [(ngModel)]="4" [readonly]="true" [cancel]="false"></p-rating>
+                    <span class="ms-2 text-muted">(48 reseñas)</span>
+                </div>
+
+                <h2 class="product-price mb-4">${{ product.basePrice }}</h2>
+
+                <p class="product-description mb-4">
+                    {{ product.description }}
+                </p>
+
+                <div class="product-options mb-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Talla:</label>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button
+                                    *ngFor="let size of sizes"
+                                    class="btn"
+                                    [class.btn-primary]="selectedSize === size"
+                                    [class.btn-outline-primary]="selectedSize !== size"
+                                    (click)="selectedSize = size">
+                                {{ size }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Color:</label>
+                        <p-dropdown
+                                [(ngModel)]="selectedColor"
+                                [options]="colors"
+                                placeholder="Selecciona un color"
+                                class="w-100">
+                        </p-dropdown>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Cantidad:</label>
+                        <div class="quantity-selector d-flex align-items-center gap-2">
+                            <button pButton
+                                    icon="pi pi-minus"
+                                    class="p-button-sm p-button-outlined"
+                                    (click)="decrementQuantity()"></button>
+                            <input type="number"
+                                   [(ngModel)]="quantity"
+                                   class="form-control text-center"
+                                   style="width: 80px;"
+                                   min="1">
+                            <button pButton
+                                    icon="pi pi-plus"
+                                    class="p-button-sm p-button-outlined"
+                                    (click)="incrementQuantity()"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons d-flex gap-3">
+                    <button pButton
+                            label="Agregar al Carrito"
+                            icon="pi pi-shopping-cart"
+                            class="flex-fill p-button-lg"
+                            [disabled]="!product.active"
+                            (click)="addToCart()"></button>
+                    <button pButton
+                            label="Comprar Ahora"
+                            icon="pi pi-bolt"
+                            class="flex-fill p-button-lg p-button-warning"
+                            [disabled]="!product.active"
+                            (click)="buyNow()"></button>
+                </div>
+
+                <div class="product-features mt-4">
+                    <div class="feature-item">
+                        <i class="pi pi-check-circle text-success"></i>
+                        <span>Envío gratis en compras mayores a $50</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="pi pi-check-circle text-success"></i>
+                        <span>Garantía de 30 días</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="pi pi-check-circle text-success"></i>
+                        <span>Devolución gratuita</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <p-tabView>
+                <p-tabPanel header="Descripción">
+                    <p>{{ product.description }}</p>
+                    <h5 class="mt-3">Características:</h5>
+                    <ul>
+                        <li>Material de alta calidad</li>
+                        <li>Diseño ergonómico</li>
+                        <li>Ideal para entrenamientos intensos</li>
+                        <li>Fácil de lavar</li>
+                    </ul>
+                </p-tabPanel>
+                <p-tabPanel header="Reseñas">
+                    <p>Las reseñas estarán disponibles próximamente.</p>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5" *ngIf="loading">
+    <div class="text-center">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Variables personalizadas */
+:root {
+  --primary-color: #ff6b35;
+  --secondary-color: #004e89;
+  --accent-color: #1a659e;
+  --text-dark: #2b2d42;
+  --text-light: #8d99ae;
+  --bg-light: #f8f9fa;
+  --success-color: #06d6a0;
+  --warning-color: #ffd60a;
+  --danger-color: #ef476f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  color: var(--text-dark);
+  background-color: #ffffff;
+  line-height: 1.6;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Estilos para Material Angular */
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+/* Estilos personalizados para Bootstrap */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+
+  &:hover {
+    background-color: darken(#ff6b35, 10%);
+    border-color: darken(#ff6b35, 10%);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+
+  &:hover {
+    background-color: darken(#004e89, 10%);
+    border-color: darken(#004e89, 10%);
+  }
+}
+
+/* Animaciones suaves */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para PrimeNG */
+.p-button {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+
+  &:hover {
+    background-color: darken(#ff6b35, 10%);
+    border-color: darken(#ff6b35, 10%);
+  }
+}
+
+/* Utilidades */
+.text-primary-custom {
+  color: var(--primary-color);
+}
+
+.bg-primary-custom {
+  background-color: var(--primary-color);
+}
+
+.shadow-custom {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: darken(#ff6b35, 10%);
+}

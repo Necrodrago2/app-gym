@@ -1,0 +1,143 @@
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="row align-items-center min-vh-70">
+            <div class="col-lg-6 text-white hero-content">
+                <h1 class="display-3 fw-bold mb-4 fade-in">
+                    Alcanza tus metas con <span class="text-highlight">GymWear</span>
+                </h1>
+                <p class="lead mb-4 fade-in">
+                    Descubre nuestra colección premium de ropa deportiva diseñada para maximizar tu rendimiento
+                </p>
+                <button pButton
+                        label="Explorar Productos"
+                        icon="pi pi-arrow-right"
+                        class="p-button-lg p-button-warning"
+                        (click)="navigateToProducts()"></button>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <img src="assets/hero-image.png" alt="Hero" class="img-fluid hero-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categorías Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Explora Nuestras Categorías</h2>
+            <p class="text-muted">Encuentra exactamente lo que necesitas</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3" *ngFor="let category of categories">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="pi {{ category.icon }}"></i>
+                    </div>
+                    <h5 class="mt-3">{{ category.name }}</h5>
+                    <button pButton
+                            label="Ver más"
+                            class="p-button-text p-button-sm"
+                            (click)="navigateToProducts()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Productos Destacados -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Productos Destacados</h2>
+            <p class="text-muted">Lo mejor de nuestra colección</p>
+        </div>
+
+        <div *ngIf="loading" class="text-center">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+
+        <div class="row g-4" *ngIf="!loading">
+            <div class="col-md-6 col-lg-4" *ngFor="let product of featuredProducts">
+                <p-card [header]="product.name" styleClass="product-card">
+                    <ng-template pTemplate="header">
+                        <img [src]="product.imageUrl || 'assets/placeholder-product.jpg'"
+                             [alt]="product.name"
+                             class="product-image">
+                    </ng-template>
+
+                    <p class="product-description">{{ product.description | slice:0:100 }}...</p>
+
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="price-tag">${{ product.basePrice }}</span>
+                        <p-rating [(ngModel)]="4" [readonly]="true" [cancel]="false"></p-rating>
+                    </div>
+
+                    <ng-template pTemplate="footer">
+                        <button pButton
+                                label="Ver Detalles"
+                                icon="pi pi-eye"
+                                class="w-100"
+                                (click)="viewProduct(product)"></button>
+                    </ng-template>
+                </p-card>
+            </div>
+        </div>
+
+        <div class="text-center mt-5" *ngIf="!loading">
+            <button pButton
+                    label="Ver Todos los Productos"
+                    icon="pi pi-shopping-bag"
+                    class="p-button-lg p-button-outlined"
+                    (click)="navigateToProducts()"></button>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <i class="pi pi-truck feature-icon"></i>
+                    <h5 class="mt-3">Envío Gratis</h5>
+                    <p class="text-muted">En compras mayores a $50</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <i class="pi pi-shield feature-icon"></i>
+                    <h5 class="mt-3">Garantía de Calidad</h5>
+                    <p class="text-muted">Productos 100% originales</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <i class="pi pi-refresh feature-icon"></i>
+                    <h5 class="mt-3">Devoluciones Fáciles</h5>
+                    <p class="text-muted">30 días para devoluciones</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center text-white">
+                <h3 class="mb-3">Suscríbete a nuestro boletín</h3>
+                <p class="mb-4">Recibe ofertas exclusivas y novedades directamente en tu correo</p>
+                <div class="input-group">
+                    <input type="email" class="form-control" placeholder="Tu correo electrónico">
+                    <button pButton label="Suscribirse" class="p-button-warning"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

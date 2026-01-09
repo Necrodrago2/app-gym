@@ -1,0 +1,34 @@
+.checkout-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h5 {
+    color: var(--text-dark);
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+  }
+}
+
+.order-summary {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 100px;
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    &.total {
+      font-size: 1.3rem;
+      color: var(--primary-color);
+    }
+  }
+}
