@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    templateUrl: './appcomponent.html',
+    styleUrls: ['./appcomponent.scss']
 })
 export class AppComponent {
     title = 'GymWear - Tu Tienda de Ropa Deportiva';

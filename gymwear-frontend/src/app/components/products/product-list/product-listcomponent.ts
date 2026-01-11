@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product, Category } from '../../../models/models';
-import { ProductService } from '../../../services/product.service';
-import { CartService } from '../../../services/cart.service';
+import { ProductService } from '../../../services/productservice';
+import { CartService } from '../../../services/cartservice';
 import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-product-list',
-    templateUrl: './product-list.component.html',
-    styleUrls: ['./product-list.component.scss']
+    templateUrl: './product-listcomponent.html',
+    styleUrls: ['./product-listcomponent.scss']
 })
 export class ProductListComponent implements OnInit {
     products: Product[] = [];

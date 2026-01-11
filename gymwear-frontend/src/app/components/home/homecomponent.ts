@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../models/models';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '../../services/productservice';
 
 @Component({
     selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    templateUrl: './homecomponent.html',
+    styleUrls: ['./homecomponent.scss']
 })
 export class HomeComponent implements OnInit {
     featuredProducts: Product[] = [];

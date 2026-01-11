@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../../services/cartservice';
 import { CartItem } from '../../models/models';
 import { ConfirmationService, MessageService } from 'primeng/api';
 

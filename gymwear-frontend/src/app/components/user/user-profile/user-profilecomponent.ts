@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../services/user.service';
-import { OrderService } from '../../../services/order.service';
+import { UserService } from '../../../services/userservice';
+import { OrderService } from '../../../services/orderservice';
 import { User, Order } from '../../../models/models';
 
 @Component({
     selector: 'app-user-profile',
-    templateUrl: './user-profile.component.html',
-    styleUrls: ['./user-profile.component.scss']
+    templateUrl: './user-profilecomponent.html',
+    styleUrls: ['./user-profilecomponent.scss']
 })
 export class UserProfileComponent implements OnInit {
     user: User | null = null;

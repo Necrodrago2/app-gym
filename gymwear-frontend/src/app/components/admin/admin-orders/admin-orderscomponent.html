@@ -1,0 +1,180 @@
+<div class="admin-orders">
+    <div class="toolbar mb-4">
+        <h3 class="mb-0">Gestión de Órdenes</h3>
+        <div class="d-flex gap-2">
+            <button pButton
+                    label="Actualizar"
+                    icon="pi pi-refresh"
+                    class="p-button-outlined"
+                    (click)="loadOrders()"></button>
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="text-center py-5">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+
+    <div *ngIf="!loading" class="orders-table">
+        <p-table [value]="orders"
+                 [paginator]="true"
+                 [rows]="10"
+                 [tableStyle]="{'min-width': '60rem'}"
+                 styleClass="p-datatable-gridlines">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-order>
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.createdAt | date:'short' }}</td>
+                    <td>Usuario #{{ order.userId }}</td>
+                    <td class="fw-bold">${{ order.grandTotal?.toFixed(2) || order.total?.toFixed(2) }}</td>
+                    <td>
+                        <p-tag [value]="getStatusLabel(order.status)"
+                               [severity]="getStatusSeverity(order.status)"></p-tag>
+                    </td>
+                    <td>
+                        <button pButton
+                                icon="pi pi-eye"
+                                class="p-button-sm p-button-text p-button-info"
+                                pTooltip="Ver detalles"
+                                (click)="viewOrder(order)"></button>
+                        <button pButton
+                                icon="pi pi-file-pdf"
+                                class="p-button-sm p-button-text p-button-danger"
+                                pTooltip="Descargar PDF"
+                                (click)="downloadPdf(order.id!)"></button>
+                        <button pButton
+                                icon="pi pi-envelope"
+                                class="p-button-sm p-button-text p-button-success"
+                                pTooltip="Enviar email"
+                                (click)="sendEmail(order.id!)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6" class="text-center py-4">
+                        <i class="pi pi-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="mt-2">No hay órdenes registradas</p>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <!-- Dialog para ver detalles de la orden -->
+    <p-dialog [(visible)]="displayDialog"
+              header="Detalles de la Orden"
+              [modal]="true"
+              [style]="{width: '700px'}"
+              [draggable]="false"
+              [resizable]="false">
+        <div *ngIf="selectedOrder">
+            <div class="order-details">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-2">ID de Orden</h6>
+                        <p class="fw-bold">#{{ selectedOrder.id }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-2">Fecha</h6>
+                        <p class="fw-bold">{{ selectedOrder.createdAt | date:'medium' }}</p>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-2">Estado Actual</h6>
+                        <p-tag [value]="getStatusLabel(selectedOrder.status)"
+                               [severity]="getStatusSeverity(selectedOrder.status)"></p-tag>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-2">Cambiar Estado</h6>
+                        <p-dropdown [options]="statusOptions"
+                                    [(ngModel)]="selectedOrder.status"
+                                    optionLabel="label"
+                                    optionValue="value"
+                                    placeholder="Cambiar estado"
+                                    [style]="{'width': '100%'}"
+                                    (onChange)="updateOrderStatus(selectedOrder, $event.value)">
+                        </p-dropdown>
+                    </div>
+                </div>
+
+                <div class="mb-4" *ngIf="selectedOrder.shippingAddress">
+                    <h6 class="text-muted mb-2">Dirección de Envío</h6>
+                    <p>{{ selectedOrder.shippingAddress }}</p>
+                </div>
+
+                <div class="mb-4" *ngIf="selectedOrder.items && selectedOrder.items.length > 0">
+                    <h6 class="text-muted mb-3">Productos</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Subtotal</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let item of selectedOrder.items">
+                                <td>{{ item.productName }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ item.price.toFixed(2) }}</td>
+                                <td>${{ item.subtotal.toFixed(2) }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="order-summary">
+                    <div class="row mb-2">
+                        <div class="col-6 text-muted">Subtotal:</div>
+                        <div class="col-6 text-end">${{ selectedOrder.subtotal?.toFixed(2) || '0.00' }}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6 text-muted">Envío:</div>
+                        <div class="col-6 text-end">${{ selectedOrder.shipping?.toFixed(2) || '0.00' }}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6 text-muted">IVA:</div>
+                        <div class="col-6 text-end">${{ selectedOrder.tax?.toFixed(2) || '0.00' }}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6"><strong>Total:</strong></div>
+                        <div class="col-6 text-end">
+                            <strong class="text-primary" style="font-size: 1.3rem;">
+                                ${{ selectedOrder.grandTotal?.toFixed(2) || selectedOrder.total?.toFixed(2) }}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-end mt-4">
+                <button pButton
+                        label="Cerrar"
+                        icon="pi pi-times"
+                        class="p-button-outlined"
+                        (click)="hideDialog()"></button>
+                <button pButton
+                        label="Descargar PDF"
+                        icon="pi pi-file-pdf"
+                        class="p-button-danger"
+                        (click)="downloadPdf(selectedOrder.id!)"></button>
+            </div>
+        </div>
+    </p-dialog>
+</div>

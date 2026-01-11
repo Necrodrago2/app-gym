@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CartService } from '../../services/cart.service';
-import { OrderService } from '../../services/order.service';
-import { UserService } from '../../services/user.service';
+import { CartService } from '../../services/cartservice';
+import { OrderService } from '../../services/orderservice';
+import { UserService } from '../../services/userservice';
 import { MessageService } from 'primeng/api';
 
 @Component({

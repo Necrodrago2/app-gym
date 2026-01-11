@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../../models/models';
-import { ProductService } from '../../../services/product.service';
-import { CartService } from '../../../services/cart.service';
+import { ProductService } from '../../../services/productservice';
+import { CartService } from '../../../services/cartservice';
 import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-product-detail',
-    templateUrl: './product-detail.component.html',
-    styleUrls: ['./product-detail.component.scss']
+    templateUrl: './product-detailcomponent.html',
+    styleUrls: ['./product-detailcomponent.scss']
 })
 export class ProductDetailComponent implements OnInit {
     product: Product | null = null;

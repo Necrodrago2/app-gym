@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './components/home/home.component';
-import { ProductListComponent } from './components/products/product-list/product-list.component';
-import { ProductDetailComponent } from './components/products/product-detail/product-detail.component';
-import { CartComponent } from './components/cart/cart.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { RegisterComponent } from './components/auth/register/register.component';
-import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
-import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
+import { HomeComponent } from './components/home/homecomponent';
+import { ProductListComponent } from './components/products/product-list/product-listcomponent';
+import { ProductDetailComponent } from './components/products/product-detail/product-detailcomponent';
+import { CartComponent } from './components/cart/cartcomponent';
+import { CheckoutComponent } from './components/checkout/checkoutcomponent';
+import { UserProfileComponent } from './components/user/user-profile/user-profilecomponent';
+import { LoginComponent } from './components/auth/login/logincomponent';
+import { RegisterComponent } from './components/auth/register/registercomponent';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboardcomponent';
+import { AdminProductsComponent } from './components/admin/admin-products/admin-productscomponent';
+import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orderscomponent';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
