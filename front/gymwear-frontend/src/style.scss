@@ -42,8 +42,8 @@ html, body {
   border-color: var(--primary-color);
 
   &:hover {
-    background-color: darken(#ff6b35, 10%);
-    border-color: darken(#ff6b35, 10%);
+    background-color: #e55a28;
+    border-color: #e55a28;
   }
 }
 
@@ -52,8 +52,8 @@ html, body {
   border-color: var(--secondary-color);
 
   &:hover {
-    background-color: darken(#004e89, 10%);
-    border-color: darken(#004e89, 10%);
+    background-color: #003d6e;
+    border-color: #003d6e;
   }
 }
 
@@ -79,8 +79,8 @@ html, body {
   border-color: var(--primary-color);
 
   &:hover {
-    background-color: darken(#ff6b35, 10%);
-    border-color: darken(#ff6b35, 10%);
+    background-color: #e55a28;
+    border-color: #e55a28;
   }
 }
 
@@ -119,5 +119,5 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: darken(#ff6b35, 10%);
+  background: #e55a28;
 }

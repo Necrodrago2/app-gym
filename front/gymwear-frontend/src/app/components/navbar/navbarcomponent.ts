@@ -7,8 +7,8 @@ import { User } from '../../models/models';
 
 @Component({
     selector: 'app-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.scss']
+    templateUrl: './navbarcomponent.html',
+    styleUrls: ['./navbarcomponent.scss']
 })
 export class NavbarComponent implements OnInit {
     currentUser: User | null = null;
