@@ -6,8 +6,8 @@ import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss']
+    templateUrl: './registercomponent.html',
+    styleUrls: ['./registercomponent.scss']
 })
 export class RegisterComponent {
     registerForm: FormGroup;

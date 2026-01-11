@@ -6,8 +6,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-cart',
-    templateUrl: './cart.component.html',
-    styleUrls: ['./cart.component.scss']
+    templateUrl: './cartcomponent.html',
+    styleUrls: ['./cartcomponent.scss']
 })
 export class CartComponent implements OnInit {
     cartItems: CartItem[] = [];

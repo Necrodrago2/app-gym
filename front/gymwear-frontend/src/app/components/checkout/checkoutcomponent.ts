@@ -8,8 +8,8 @@ import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-checkout',
-    templateUrl: './checkout.component.html',
-    styleUrls: ['./checkout.component.scss']
+    templateUrl: './checkoutcomponent.html',
+    styleUrls: ['./checkoutcomponent.scss']
 })
 export class CheckoutComponent implements OnInit {
     checkoutForm: FormGroup;
