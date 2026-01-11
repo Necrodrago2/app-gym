@@ -6,6 +6,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 @Component({
     selector: 'app-admin-orders',
     templateUrl: './admin-orderscomponent.html',
+    standalone: true,
     styleUrls: ['./admin-orderscomponent.scss']
 })
 export class AdminOrdersComponent implements OnInit {
@@ -135,3 +136,4 @@ export class AdminOrdersComponent implements OnInit {
         this.selectedOrder = null;
     }
 }
+

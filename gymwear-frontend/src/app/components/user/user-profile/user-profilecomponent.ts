@@ -6,6 +6,7 @@ import { User, Order } from '../../../models/models';
 @Component({
     selector: 'app-user-profile',
     templateUrl: './user-profilecomponent.html',
+    standalone: true,
     styleUrls: ['./user-profilecomponent.scss']
 })
 export class UserProfileComponent implements OnInit {
